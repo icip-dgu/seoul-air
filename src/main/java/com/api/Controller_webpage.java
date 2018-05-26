@@ -1,8 +1,5 @@
 package com.api;
 
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
-import com.mongodb.client.MongoDatabase;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,19 +14,12 @@ import java.util.Map;
 @Controller
 	public class Controller_webpage {
 
-
-	MongoClientURI uri = new MongoClientURI(
-			"mongodb+srv://erply:passwoord@mongodb1-jfgqu.mongodb.net/test?retryWrites=true");
-	MongoClient mongoClient = new MongoClient(uri);
-	MongoDatabase database = mongoClient.getDatabase("airdata");
-
 	Map<String, Integer> dictionary = new HashMap<String, Integer>();
 
 	@RequestMapping("/")
 	public String index() {
 	  return "homepage.html";
 	}
-
 
 
 	@RequestMapping(value = "/api/{name}",  method = RequestMethod.GET)

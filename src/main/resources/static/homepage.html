@@ -1,28 +1,46 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Seoul Air Quality Information</title>
+    <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcNU3xUtfkL6exAXrn918Uux2cx3DDIJA">
+    </script>
+
+    <script>
+        var map;
+        var myCenter=new google.maps.LatLng(37.554117, 126.988480);
+
+        function initialize()
+        {
+            var mapProp = {
+                center:myCenter,
+                zoom:12,
+                mapTypeId:google.maps.MapTypeId.ROADMAP
+            };
+
+            map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+            google.maps.event.addListener(map, 'click', function(event) {
+                placeMarker(event.latLng);
+            });
+        }
+
+        function placeMarker(location) {
+            var marker = new google.maps.Marker({
+                position: location,
+                map: map,
+            });
+            var infowindow = new google.maps.InfoWindow({
+                content: 'Latitude: ' + location.lat() + '<br>Longitude: ' + location.lng()
+            });
+            infowindow.open(map,marker);
+        }
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
 </head>
+
 <body>
-강남구
-강동구
-강북구
-강서구
-관악구
-광진구
-구로구
-금천구
-노원구
-도봉구
-동대문구
-동작구
-마포구
-서대문구
-서초구
-성동구
-성북구
-송파구 양천구 영등포구 용산구 은평구 종로구 중구 중랑구
+<div id="googleMap" style="width:700px;height:700px;"></div>
+
 </body>
 </html>
