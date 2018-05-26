@@ -1,4 +1,4 @@
-package main;
+package com.api;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
@@ -27,24 +27,21 @@ import java.util.Map;
 
 	@RequestMapping("/")
 	public String index() {
-	    return "homepage.html";
+	  return "homepage.html";
 	}
 
 
 
-    @RequestMapping(value = "/{name}",  method = RequestMethod.GET)
-    public ModelAndView method(@PathVariable String name) {
-        dictionary.put("jongro", 111123);
-        System.out.println(dictionary.get(name));
-        return new ModelAndView("redirect:" + String.format("http://openapi.seoul.go.kr:8088/535a7357446f6a32373762486c4c6c/json/ListAirQualityByDistrictService/1/5/%s/", dictionary.get(name)));
-
-    }
+	@RequestMapping(value = "/api/{name}",  method = RequestMethod.GET)
+  public ModelAndView method(@PathVariable String name) {
+	  dictionary.put("jongro", 111123);
+	  System.out.println(dictionary.get(name));
+	  return new ModelAndView("redirect:" + String.format("http://openapi.seoul.go.kr:8088/535a7357446f6a32373762486c4c6c/json/ListAirQualityByDistrictService/1/5/%s/", dictionary.get(name)));
+	}
 	
 	///hello-world/path-variable/in28minutes
 	@GetMapping(path = "/hello-world/path-variable/{name}")
 	public BeanExample helloWorldPathVariable(@PathVariable String name) {
 		return new BeanExample(String.format("Hello World, %s", name));
 	}
-
-
 }
