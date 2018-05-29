@@ -29,3 +29,8 @@ Step 2: By the following week meeting - beta version
 Link both of above to slack channels so team members are informed of status all within slack
 
 Step 3: The released version!
+
+####  How to run
+
+- To run from console, `mvn`
+- Above is also needed because that's what Heroku system would assume a Spring Boot app to have 
