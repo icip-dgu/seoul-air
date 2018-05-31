@@ -1,28 +1,130 @@
 
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+    <!--<meta charset="UTF-8">-->
+    <!--<title>Seoul Air Quality Information</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--강남구-->
+<!--강동구-->
+<!--강북구-->
+<!--강서구-->
+<!--관악구-->
+<!--광진구-->
+<!--구로구-->
+<!--금천구-->
+<!--노원구-->
+<!--도봉구-->
+<!--동대문구-->
+<!--동작구-->
+<!--마포구-->
+<!--서대문구-->
+<!--서초구-->
+<!--성동구-->
+<!--성북구-->
+<!--송파구 양천구 영등포구 용산구 은평구 종로구 중구 중랑구-->
+<!--</body>-->
+<!--</html>-->
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
+
+<style>
+    .left-box {
+        float: left;
+        width: 50%;
+    }
+    .right-box {
+        float: right;
+        width: 50%;
+    }
+</style>
+
+
 <head>
-    <meta charset="UTF-8">
-    <title>Seoul Air Quality Information</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcNU3xUtfkL6exAXrn918Uux2cx3DDIJA"> </script>
+
+    <script>
+        var map;
+        var myCenter=new google.maps.LatLng(37.554117, 126.988480);
+        function initialize()
+        {
+            var mapProp = {
+                center:myCenter,
+                zoom:12,
+                mapTypeId:google.maps.MapTypeId.ROADMAP
+            };
+            map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+            google.maps.event.addListener(map, 'click', function(event) {
+                placeMarker(event.latLng);
+            });
+        }
+        function placeMarker(location) {
+            var marker = new google.maps.Marker({
+                position: location,
+                map: map,
+            });
+            var infowindow = new google.maps.InfoWindow({
+                content: 'Latitude: ' + location.lat() + '<br>Longitude: ' + location.lng()
+            });
+            infowindow.open(map,marker);
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
 </head>
+
+
 <body>
-강남구
-강동구
-강북구
-강서구
-관악구
-광진구
-구로구
-금천구
-노원구
-도봉구
-동대문구
-동작구
-마포구
-서대문구
-서초구
-성동구
-성북구
-송파구 양천구 영등포구 용산구 은평구 종로구 중구 중랑구
+<h2>RMS Seoul Air Project</h2>
+<div class='left-box' id="googleMap" style="width:700px;height:700px;">왼쪽</div>
+<div class='right-box'  id="demo">오른쪽</div>
+
+
+
+<script>
+    var obj = JSON.parse('{"DESCRIPTION" : {"PM25":"초미세먼지 농도(단위:㎍/㎥)","CARBON":"일산화탄소 농도(단위:ppm)","POLLUTANT":"지수결정물질","PM10":"미세먼지 농도(단위:㎍/㎥)","MSRSTENAME":"측정소명","MAXINDEX":"통합대기환경지수","GRADE":"통합대기환경지수 등급","NITROGEN":"이산화질소 농도(단위:ppm)","MSRADMCODE":"측정소 행정코드","SULFUROUS":"아황산가스 농도(단위:ppm)","OZONE":"오존 농도(단위:ppm)","MSRDATE":"측정날짜"},"DATA" : [{"msrstename":"종로구","ozone":"0.076","carbon":"0.6","sulfurous":"0.004","maxindex":"89","pm10":"66","grade":"보통","pm25":"31","msrdate":"201805262100","pollutant":"O3","nitrogen":"0.031","msradmcode":"111123"},{"msrstename":"중구","ozone":"0.076","carbon":"0.5","sulfurous":"0.003","maxindex":"91","pm10":"64","grade":"보통","pm25":"26","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.023","msradmcode":"111121"},{"msrstename":"용산구","ozone":"0.058","carbon":"0.5","sulfurous":"0.004","maxindex":"91","pm10":"70","grade":"보통","pm25":"35","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.038","msradmcode":"111131"},{"msrstename":"성동구","ozone":"0.052","carbon":"0.4","sulfurous":"0.006","maxindex":"117","pm10":"105","grade":"나쁨","pm25":"54","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.030","msradmcode":"111142"},{"msrstename":"광진구","ozone":"0.051","carbon":"0.7","sulfurous":"0.005","maxindex":"104","pm10":"80","grade":"나쁨","pm25":"38","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.037","msradmcode":"111141"},{"msrstename":"동대문구","ozone":"0.043","carbon":"0.4","sulfurous":"0.007","maxindex":"86","pm10":"63","grade":"보통","pm25":"31","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.031","msradmcode":"111152"},{"msrstename":"중랑구","ozone":"0.074","carbon":"0.7","sulfurous":"0.007","maxindex":"87","pm10":"66","grade":"보통","pm25":"28","msrdate":"201805262100","pollutant":"O3","nitrogen":"0.034","msradmcode":"111151"},{"msrstename":"성북구","ozone":"0.083","carbon":"0.7","sulfurous":"0.003","maxindex":"125","pm10":"81","grade":"나쁨","pm25":"65","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.027","msradmcode":"111161"},{"msrstename":"강북구","ozone":"0.103","carbon":"0.5","sulfurous":"0.004","maxindex":"132","pm10":"66","grade":"나쁨","pm25":"30","msrdate":"201805262100","pollutant":"O3","nitrogen":"0.021","msradmcode":"111291"},{"msrstename":"도봉구","ozone":"0.103","carbon":"0.5","sulfurous":"0.005","maxindex":"132","pm10":"81","grade":"나쁨","pm25":"40","msrdate":"201805262100","pollutant":"O3","nitrogen":"0.020","msradmcode":"111171"},{"msrstename":"노원구","ozone":"0.076","carbon":"0.6","sulfurous":"0.005","maxindex":"89","pm10":"73","grade":"보통","pm25":"33","msrdate":"201805262100","pollutant":"O3","nitrogen":"0.035","msradmcode":"111311"},{"msrstename":"은평구","ozone":"0.051","carbon":"0.4","sulfurous":"0.003","maxindex":"104","pm10":"63","grade":"나쁨","pm25":"41","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.036","msradmcode":"111181"},{"msrstename":"서대문구","ozone":"0.061","carbon":"0.5","sulfurous":"0.003","maxindex":"119","pm10":"91","grade":"나쁨","pm25":"38","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.020","msradmcode":"111191"},{"msrstename":"마포구","ozone":"0.064","carbon":"0.6","sulfurous":"0.004","maxindex":"119","pm10":"101","grade":"나쁨","pm25":"41","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.024","msradmcode":"111201"},{"msrstename":"양천구","ozone":"0.062","carbon":"0.5","sulfurous":"0.004","maxindex":"85","pm10":"63","grade":"보통","pm25":"32","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.031","msradmcode":"111301"},{"msrstename":"강서구","ozone":"0.062","carbon":"0.5","sulfurous":"0.004","maxindex":"91","pm10":"72","grade":"보통","pm25":"27","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.028","msradmcode":"111212"},{"msrstename":"구로구","ozone":"0.056","carbon":"0.4","sulfurous":"0.005","maxindex":"100","pm10":"90","grade":"보통","pm25":"38","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.037","msradmcode":"111221"},{"msrstename":"금천구","ozone":"0.039","carbon":"0.6","sulfurous":"0.004","maxindex":"92","pm10":"69","grade":"보통","pm25":"27","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.052","msradmcode":"111281"},{"msrstename":"영등포구","ozone":"0.038","carbon":"0.8","sulfurous":"0.006","maxindex":"119","pm10":"94","grade":"나쁨","pm25":"43","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.045","msradmcode":"111231"},{"msrstename":"동작구","ozone":"0.066","carbon":"0.8","sulfurous":"0.006","maxindex":"89","pm10":"73","grade":"보통","pm25":"43","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.037","msradmcode":"111241"},{"msrstename":"관악구","ozone":"0.041","carbon":"0.5","sulfurous":"0.004","maxindex":"123","pm10":"89","grade":"나쁨","pm25":"44","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.049","msradmcode":"111251"},{"msrstename":"서초구","ozone":"0.050","carbon":"0.5","sulfurous":"0.004","maxindex":"106","pm10":"79","grade":"나쁨","pm25":"29","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.046","msradmcode":"111262"},{"msrstename":"강남구","ozone":"0.030","carbon":"0.6","sulfurous":"0.006","maxindex":"89","pm10":"71","grade":"보통","pm25":"39","msrdate":"201805262100","pollutant":"NO2","nitrogen":"0.053","msradmcode":"111261"},{"msrstename":"송파구","ozone":"0.063","carbon":"0.9","sulfurous":"0.004","maxindex":"117","pm10":"94","grade":"나쁨","pm25":"47","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.044","msradmcode":"111273"},{"msrstename":"강동구","ozone":"0.048","carbon":"0.7","sulfurous":"0.005","maxindex":"91","pm10":"79","grade":"보통","pm25":"32","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.045","msradmcode":"111274"}]}');
+
+    var cityList = new Array();
+    for(var i=0; i<25; i++){
+        var temp = {
+            msrstename : obj.DATA[i].msrstename,
+            ozone : obj.DATA[i].ozone,
+            carbon: obj.DATA[i].carbon,
+            sulfurous: obj.DATA[i].sulfurous,
+            maxindex: obj.DATA[i].maxindex,
+            pm10: obj.DATA[i].pm10,
+            grade: obj.DATA[i].grade,
+            pm25 : obj.DATA[i].pm25,
+            msrdate : obj.DATA[i].msrdate,
+            pollutant: obj.DATA[i].pollutant,
+            nitrogen: obj.DATA[i].nitrogen,
+            msradmcode: obj.DATA[i].msradmcode };
+        cityList.push(temp);
+    }
+
+    document.getElementById("demo").innerHTML = cityList[0].msrstename;
+    document.getElementById("demo").innerHTML += "<br>"+obj.DESCRIPTION.PM25;
+    document.getElementById("demo").innerHTML += " : "+cityList[0].pm25;
+
+    document.getElementById("demo").innerHTML += "<br>"+obj.DESCRIPTION.OZONE;
+    document.getElementById("demo").innerHTML += " : "+cityList[0].ozone;
+
+    document.getElementById("demo").innerHTML += "<br>"+obj.DESCRIPTION.CARBON;
+    document.getElementById("demo").innerHTML += " : "+cityList[0].carbon;
+
+    document.getElementById("demo").innerHTML += "<br>"+obj.DESCRIPTION.POLLUTANT;
+    document.getElementById("demo").innerHTML += " : "+cityList[0].pollutant;
+
+    document.getElementById("demo").innerHTML += "<br>"+obj.DESCRIPTION.PM10;
+    document.getElementById("demo").innerHTML += " : "+cityList[0].pm10;
+
+    document.getElementById("demo").innerHTML += "<br>"+obj.DESCRIPTION.PM25;
+    document.getElementById("demo").innerHTML += " : "+cityList[0].pm25;
+
+</script>
+
+
 </body>
 </html>
