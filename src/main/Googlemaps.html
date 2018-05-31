@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Seoul Air</title>
+
+</head>
+<body>
+<div id="map" style="width:50% ;height:350px;"></div>
+
+<script src ="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcNU3xUtfkL6exAXrn918Uux2cx3DDIJA"></script>
+<script>
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+    mapOption = {
+        center: new google.maps.LatLng(37.554117, 126.988480), // 지도의 중심좌표
+        zoom: 12 // 지도의 확대 레벨
+    };
+
+var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+
+// 마커를 표시할 위치와 title 객체 배열입니다
+var positions = [
+    {
+        title: '중구',
+        latlng: new google.maps.LatLng(37.560281, 126.996876)
+    },
+    {
+        title: '강남구',
+        latlng: new google.maps.LatLng(37.495304, 127.063173)
+    },
+    {
+        title: '강동구',
+        latlng: new google.maps.LatLng(37.552215, 127.138490)
+    },
+    {
+        title: '강북구',
+        latlng: new google.maps.LatLng(37.646489, 127.010216)
+    },
+     {
+        title: '강서구',
+        latlng: new google.maps.LatLng(37.561147, 126.826004)
+    }
+     {
+        title: '관악구',
+        latlng: new google.maps.LatLng(37.473130, 126.942662)
+    }
+     {
+        title: '광진구',
+        latlng: new google.maps.LatLng(37.547633, 127.085356)
+    }
+     {
+        title: '구로구',
+        latlng: new google.maps.LatLng(37.496106, 126.880962)
+    }
+    {
+        title: '금천구',
+        latlng: new google.maps.LatLng(37.460671, 126.899893)
+    }
+    {
+        title: '노원구',
+        latlng: new google.maps.LatLng(37.653244, 127.073536)
+    }
+    {
+        title: '도봉구',
+        latlng: new google.maps.LatLng(37.668814, 127.030559)
+    }
+    {
+        title: '동대문구',
+        latlng: new google.maps.LatLng37.582863, 127.053191)
+    }
+    {
+        title: '동작구',
+        latlng: new google.maps.LatLng(37.499291, 126.954163)
+    }
+    {
+        title: '마포구',
+        latlng: new google.maps.LatLng(37.559827, 126.908300)
+    }
+    {
+        title: '서대문구',
+        latlng: new google.maps.LatLng(37.580455, 126.941325)
+    }
+    {
+        title: '서초구',
+        latlng: new google.maps.LatLng(37.473438, 127.026731)
+    }
+    {
+        title: '성동구',
+        latlng: new google.maps.LatLng(37.551696, 127.042952)
+    }
+    {
+        title: '송파구',
+        latlng: new google.maps.LatLng(37.504700, 127.116915)
+    }
+    {
+        title: '양천구',
+        latlng: new google.maps.LatLng(37.526071, 126.856565)
+    }
+    {
+        title: '영등포구',
+        latlng: new google.maps.LatLng(37.522604, 126.906975)
+    }
+    {
+        title: '용산구',
+        latlng: new google.maps.LatLng(37.531610, 126.979251)
+    }
+    {
+        title: '은평구',
+        latlng: new google.maps.LatLng(37.619958, 126.928865)
+    }
+    {
+        title: '종로구',
+        latlng: new google.maps.LatLng(37.596286, 126.975685)
+    }
+    {
+        title: '중랑구',
+        latlng: new google.maps.LatLng(37.599618, 127.089214)
+    }
+
+
+];
+
+var imageSrc = 'https://maps.google.com/mapfiles/kml/shapes/info_i.png';
+
+for (var i = 0; i < positions.length; i ++) {
+
+    // 마커 이미지의 이미지 크기 입니다
+    var imageSize = new.google.maps.Size(24, 35);
+
+    // 마커 이미지를 생성합니다
+    var markerImage = new google.maps.MarkerImage(imageSrc, imageSize);
+
+    // 마커를 생성합니다
+    var marker = new google.maps.Marker({
+        map: map, // 마커를 표시할 지도
+        position: positions[i].latlng, // 마커를 표시할 위치
+        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+        image : markerImage // 마커 이미지
+    });
+}
+</script>
+</body>
+</html>
