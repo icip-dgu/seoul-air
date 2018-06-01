@@ -2,36 +2,56 @@ package com.api;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 
 @Controller
 public class Controller_webpage {
 
-    Map<String, Integer> dictionary = new HashMap<String, Integer>();
+    String baseUrl = "http://openapi.seoul.go.kr:8088";
+    String authKey = "535a7357446f6a32373762486c4c6c";
+    String requestFileType = "json";
+    String serviceName = "ListAirQualityByDistrictService";
+    String url = baseUrl + '/' + authKey + '/' + requestFileType + '/' + serviceName + "/1/25";
 
-    @RequestMapping("/")
+    //home
+    @GetMapping("/")
     public String index() {
+        BufferedReader in = null;
+
+        try {
+            //request to open API
+            URL obj = new URL(url);
+            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+            con.setRequestMethod("GET");
+            in = new BufferedReader(new InputStreamReader(con.getInputStream(), "UTF-8"));
+            String line;
+            while ((line = in.readLine()) != null) {
+                System.out.println(line);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (in != null) try {
+                in.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
         return "homepage.html";
     }
 
-    //indirect
-    @RequestMapping(value = "/api/{name}", method = RequestMethod.GET)
-    public ModelAndView method(@PathVariable String name) {
-        dictionary.put("jongro", 111123);
-        System.out.println(dictionary.get(name));
-        return new ModelAndView("redirect:" + String.format("http://openapi.seoul.go.kr:8088/535a7357446f6a32373762486c4c6c/json/ListAirQualityByDistrictService/1/5/%s/", dictionary.get(name)));
-    }
 
-    ///hello-world/path-variable/in28minutes
-    @GetMapping(path = "/hello-world/path-variable/{name}")
-    public BeanExample helloWorldPathVariable(@PathVariable String name) {
-        return new BeanExample(String.format("Hello World, %s", name));
+    //indirect
+    @GetMapping("/api")
+    public ModelAndView method() {
+        return new ModelAndView("redirect:" + url);
     }
 }
