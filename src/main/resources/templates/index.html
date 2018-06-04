@@ -49,83 +49,104 @@
       {
         position: new google.maps.LatLng(37.59460958839853, 126.97783699462889),
         type: 'jongro',
-        icon: '1.png'
+        icon: '10.png'
       }, {
         position: new google.maps.LatLng(37.577469676610335, 126.94110145996092),
         type: 'seodamoon',
-        icon: '10.png'
+        icon: '20.png'
       }, {
         position: new google.maps.LatLng(37.558420701826506, 126.9067691845703),
-        type: 'three',
-        icon: '3.png'
-      },
-      {
+        type: 'mapo',
+        icon: '30.png'
+      }, {
         position: new google.maps.LatLng(37.5236496426364, 126.85450136943814),
-        type: 'yangcheon'
+        type: 'yangcheon',
+        icon: '15.png'
       }, {
         position: new google.maps.LatLng(37.52147129113932, 126.91269457622525),
-        type: 'yeondeung'
+        type: 'yeondeung',
+        icon: '155.png'
       }, {
         position: new google.maps.LatLng(37.494236531516556, 126.85673296733853),
-        type: 'guro'
-      },
-      {
+        type: 'guro',
+        icon: '32.png'
+      }, {
         position: new google.maps.LatLng(37.4983223788854, 126.95011675640103),
-        type: 'dongjak'
+        type: 'dongjak',
+        icon: '70.png'
       }, {
         position: new google.maps.LatLng(37.467536828021956, 126.9432503013229),
-        type: 'gwanak'
+        type: 'gwanak',
+        icon: '56.png'
       }, {
         position: new google.maps.LatLng(37.461814221824106, 126.90102160259244),
-        type: 'geumcheon'
-      },
-      {
+        type: 'geumcheon',
+        icon: '60.png'
+      }, {
         position: new google.maps.LatLng(37.487466344219136, 127.01770420443415),
-        type: 'seocho'
+        type: 'seocho',
+        icon: '63.png'
       }, {
         position: new google.maps.LatLng(37.49754527695926, 127.0640527762115),
-        type: 'gangnam'
+        type: 'gangnam',
+        icon: '70.png'
       }, {
         position: new google.maps.LatLng(37.50707815066313, 127.11761112582087),
-        type: 'songpa'
-      },
-      {
+        type: 'songpa',
+        icon: '76.png'
+      }, {
         position: new google.maps.LatLng(37.550172589855215, 127.14759413867557),
-        type: 'gangdong'
+        type: 'gangdong',
+        icon: '73.png'
       }, {
         position: new google.maps.LatLng(37.545272952461666, 127.08476607471073),
-        type: 'gwangjin'
+        type: 'gwangjin',
+        icon: '32.png'
       }, {
-        position: new google.maps.LatLng(37.554117, 126.928480),
-        type: 'dongdaemoon'
+        position: new google.maps.LatLng(37.579102219193565, 127.0550846142578),
+        type: 'dongdaemoon',
+        icon: '103.png'
       }, {
-        position: new google.maps.LatLng(37.554117, 126.928480),
-        type: 'jungrang'
+        position: new google.maps.LatLng(37.59460958839853, 127.09319343994139),
+        type: 'jungrang',
+        icon: '39.png'
       }, {
-        position: new google.maps.LatLng(37.554117, 126.928480),
-        type: 'seongbuk'
+        position: new google.maps.LatLng(37.605711015919375, 127.0198940319824),
+        type: 'seongbuk',
+        icon: '70.png'
       }, {
-        position: new google.maps.LatLng(37.554117, 126.928480),
-        type: 'nowon'
+        position: new google.maps.LatLng(37.65144229622412, 127.07516899536131),
+        type: 'nowon',
+        icon: '120.png'
       }, {
-        position: new google.maps.LatLng(37.554117, 126.928480),
-        type: 'dobong'
+        position: new google.maps.LatLng(37.6668092877513, 127.03425457098206),
+        type: 'dobong',
+        icon: '169.png'
       }, {
-        position: new google.maps.LatLng(37.554117, 126.928480),
-        type: 'eunpyeong'
+        position: new google.maps.LatLng(37.61835948695618, 126.92771876113534),
+        type: 'eunpyeong',
+        icon: '36.png'
       }, {
         position: new google.maps.LatLng(37.53074288759578, 126.98041191528318),
-        type: 'yongsan'
+        type: 'yongsan',
+        icon: '38.png'
       }, {
-        position: new google.maps.LatLng(37.554117, 126.928480),
-        type: 'sixteen'
+        position: new google.maps.LatLng(37.64157347245449, 127.01281127177367),
+        type: 'gangbuk',
+        icon: '31.png'
       }, {
-        position: new google.maps.LatLng(37.554117, 126.928480),
-        type: 'sixteen'
+        position: new google.maps.LatLng(37.56017422261484, 126.82512840756999),
+        type: 'gangseo',
+        icon: '39.png'
       }, {
-        position: new google.maps.LatLng(37.554117, 126.928480),
-        type: 'sixteen'
-      }
+        position: new google.maps.LatLng(37.54859299284488, 127.04097617871048),
+        type: 'Seongdong',
+        icon: '48.png'
+      }, {
+        position: new google.maps.LatLng(37.55971520951018, 126.99556005016836),
+        type: 'jungu',
+        icon: '37.png'
+        }
     ];
 
 
@@ -146,7 +167,7 @@
         });
 
         var infowindow = new google.maps.InfoWindow({
-          content: 'Latitude: ' + feature.position.lat() + '<br>Longitude: ' + feature.position.lng()
+          content: 'District : '+ feature.type +'<br>Latitude: ' + feature.position.lat() + '<br>Longitude: ' + feature.position.lng()
         });
         marker.addListener('click' ,function () {
           infowindow.open(map, marker);
