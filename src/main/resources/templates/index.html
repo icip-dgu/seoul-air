@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="kr">
+
+
+<style>
+  .left-box {
+    float: left;
+    width: 50%;
+  }
+  .right-box {
+    float: right;
+    width: 50%;
+  }
+</style>
+
+
+<head>
+  <meta charset="utf-8">
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcNU3xUtfkL6exAXrn918Uux2cx3DDIJA"> </script>
+
+  <script>
+
+    var map;
+    var myCenter = new google.maps.LatLng(37.554117, 126.988480);
+
+    var icon = {
+      url: "img/25.png", // url
+      scaledSize: new google.maps.Size(50, 32), // scaled size
+      origin: new google.maps.Point(0,0), // origin
+      anchor: new google.maps.Point(0, 0) // anchor
+    };
+
+    var icons = {
+      one: {
+        icon: "img/20.png",
+        scaledSize: new google.maps.Size(2, 2), // scaled size
+        origin: new google.maps.Point(0,0), // origin
+        anchor: new google.maps.Point(0, 0) // anchor
+      },
+      two: {
+        icon: 'img/40.png'
+      },
+      three: {
+        icon: 'img/80.png'
+      }
+    };
+
+    var features = [
+      {
+        position: new google.maps.LatLng(37.59460958839853, 126.97783699462889),
+        type: 'jongro',
+        icon: '10.png'
+      }, {
+        position: new google.maps.LatLng(37.577469676610335, 126.94110145996092),
+        type: 'seodamoon',
+        icon: '20.png'
+      }, {
+        position: new google.maps.LatLng(37.558420701826506, 126.9067691845703),
+        type: 'mapo',
+        icon: '30.png'
+      }, {
+        position: new google.maps.LatLng(37.5236496426364, 126.85450136943814),
+        type: 'yangcheon',
+        icon: '15.png'
+      }, {
+        position: new google.maps.LatLng(37.52147129113932, 126.91269457622525),
+        type: 'yeondeung',
+        icon: '155.png'
+      }, {
+        position: new google.maps.LatLng(37.494236531516556, 126.85673296733853),
+        type: 'guro',
+        icon: '32.png'
+      }, {
+        position: new google.maps.LatLng(37.4983223788854, 126.95011675640103),
+        type: 'dongjak',
+        icon: '70.png'
+      }, {
+        position: new google.maps.LatLng(37.467536828021956, 126.9432503013229),
+        type: 'gwanak',
+        icon: '56.png'
+      }, {
+        position: new google.maps.LatLng(37.461814221824106, 126.90102160259244),
+        type: 'geumcheon',
+        icon: '60.png'
+      }, {
+        position: new google.maps.LatLng(37.487466344219136, 127.01770420443415),
+        type: 'seocho',
+        icon: '63.png'
+      }, {
+        position: new google.maps.LatLng(37.49754527695926, 127.0640527762115),
+        type: 'gangnam',
+        icon: '70.png'
+      }, {
+        position: new google.maps.LatLng(37.50707815066313, 127.11761112582087),
+        type: 'songpa',
+        icon: '76.png'
+      }, {
+        position: new google.maps.LatLng(37.550172589855215, 127.14759413867557),
+        type: 'gangdong',
+        icon: '73.png'
+      }, {
+        position: new google.maps.LatLng(37.545272952461666, 127.08476607471073),
+        type: 'gwangjin',
+        icon: '32.png'
+      }, {
+        position: new google.maps.LatLng(37.579102219193565, 127.0550846142578),
+        type: 'dongdaemoon',
+        icon: '103.png'
+      }, {
+        position: new google.maps.LatLng(37.59460958839853, 127.09319343994139),
+        type: 'jungrang',
+        icon: '39.png'
+      }, {
+        position: new google.maps.LatLng(37.605711015919375, 127.0198940319824),
+        type: 'seongbuk',
+        icon: '70.png'
+      }, {
+        position: new google.maps.LatLng(37.65144229622412, 127.07516899536131),
+        type: 'nowon',
+        icon: '120.png'
+      }, {
+        position: new google.maps.LatLng(37.6668092877513, 127.03425457098206),
+        type: 'dobong',
+        icon: '169.png'
+      }, {
+        position: new google.maps.LatLng(37.61835948695618, 126.92771876113534),
+        type: 'eunpyeong',
+        icon: '36.png'
+      }, {
+        position: new google.maps.LatLng(37.53074288759578, 126.98041191528318),
+        type: 'yongsan',
+        icon: '38.png'
+      }, {
+        position: new google.maps.LatLng(37.64157347245449, 127.01281127177367),
+        type: 'gangbuk',
+        icon: '31.png'
+      }, {
+        position: new google.maps.LatLng(37.56017422261484, 126.82512840756999),
+        type: 'gangseo',
+        icon: '39.png'
+      }, {
+        position: new google.maps.LatLng(37.54859299284488, 127.04097617871048),
+        type: 'Seongdong',
+        icon: '48.png'
+      }, {
+        position: new google.maps.LatLng(37.55971520951018, 126.99556005016836),
+        type: 'jungu',
+        icon: '37.png'
+        }
+    ];
+
+
+    function placeMarker() {
+      features.forEach(function(feature) {
+        var icon = {
+          url: "img/" + (feature.icon ? feature.icon : '25.png'), // url
+          scaledSize: new google.maps.Size(50, 32), // scaled size
+          origin: new google.maps.Point(0,0), // origin
+          anchor: new google.maps.Point(0, 0) // anchor
+        };
+
+        var marker = new google.maps.Marker({
+          position: feature.position,
+          icon: icon,
+          map: map,
+
+        });
+
+        var infowindow = new google.maps.InfoWindow({
+          content: 'District : '+ feature.type +'<br>Latitude: ' + feature.position.lat() + '<br>Longitude: ' + feature.position.lng()
+        });
+        marker.addListener('click' ,function () {
+          infowindow.open(map, marker);
+        });
+      });
+
+
+    }
+
+
+
+
+    function initialize()
+    {
+      var mapProp = {
+        center:myCenter,
+        zoom:12,
+        mapTypeId:google.maps.MapTypeId.ROADMAP
+      };
+      map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+      placeMarker();
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+  </script>
+</head>
+
+
+<body data-root="${rootContext}">
+<h2>Seoul Air Project</h2>
+<div class='left-box' id="googleMap" style="width:700px;height:700px;">왼쪽</div>
+<div class='right-box'  id="demo">오른쪽</div>
+
+
+
+<script>
+  var obj = JSON.parse('{"DESCRIPTION" : {"PM25":"초미세먼지 농도(단위:㎍/㎥)","CARBON":"일산화탄소 농도(단위:ppm)","POLLUTANT":"지수결정물질","PM10":"미세먼지 농도(단위:㎍/㎥)","MSRSTENAME":"측정소명","MAXINDEX":"통합대기환경지수","GRADE":"통합대기환경지수 등급","NITROGEN":"이산화질소 농도(단위:ppm)","MSRADMCODE":"측정소 행정코드","SULFUROUS":"아황산가스 농도(단위:ppm)","OZONE":"오존 농도(단위:ppm)","MSRDATE":"측정날짜"},"DATA" : [{"msrstename":"종로구","ozone":"0.076","carbon":"0.6","sulfurous":"0.004","maxindex":"89","pm10":"66","grade":"보통","pm25":"31","msrdate":"201805262100","pollutant":"O3","nitrogen":"0.031","msradmcode":"111123"},{"msrstename":"중구","ozone":"0.076","carbon":"0.5","sulfurous":"0.003","maxindex":"91","pm10":"64","grade":"보통","pm25":"26","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.023","msradmcode":"111121"},{"msrstename":"용산구","ozone":"0.058","carbon":"0.5","sulfurous":"0.004","maxindex":"91","pm10":"70","grade":"보통","pm25":"35","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.038","msradmcode":"111131"},{"msrstename":"성동구","ozone":"0.052","carbon":"0.4","sulfurous":"0.006","maxindex":"117","pm10":"105","grade":"나쁨","pm25":"54","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.030","msradmcode":"111142"},{"msrstename":"광진구","ozone":"0.051","carbon":"0.7","sulfurous":"0.005","maxindex":"104","pm10":"80","grade":"나쁨","pm25":"38","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.037","msradmcode":"111141"},{"msrstename":"동대문구","ozone":"0.043","carbon":"0.4","sulfurous":"0.007","maxindex":"86","pm10":"63","grade":"보통","pm25":"31","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.031","msradmcode":"111152"},{"msrstename":"중랑구","ozone":"0.074","carbon":"0.7","sulfurous":"0.007","maxindex":"87","pm10":"66","grade":"보통","pm25":"28","msrdate":"201805262100","pollutant":"O3","nitrogen":"0.034","msradmcode":"111151"},{"msrstename":"성북구","ozone":"0.083","carbon":"0.7","sulfurous":"0.003","maxindex":"125","pm10":"81","grade":"나쁨","pm25":"65","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.027","msradmcode":"111161"},{"msrstename":"강북구","ozone":"0.103","carbon":"0.5","sulfurous":"0.004","maxindex":"132","pm10":"66","grade":"나쁨","pm25":"30","msrdate":"201805262100","pollutant":"O3","nitrogen":"0.021","msradmcode":"111291"},{"msrstename":"도봉구","ozone":"0.103","carbon":"0.5","sulfurous":"0.005","maxindex":"132","pm10":"81","grade":"나쁨","pm25":"40","msrdate":"201805262100","pollutant":"O3","nitrogen":"0.020","msradmcode":"111171"},{"msrstename":"노원구","ozone":"0.076","carbon":"0.6","sulfurous":"0.005","maxindex":"89","pm10":"73","grade":"보통","pm25":"33","msrdate":"201805262100","pollutant":"O3","nitrogen":"0.035","msradmcode":"111311"},{"msrstename":"은평구","ozone":"0.051","carbon":"0.4","sulfurous":"0.003","maxindex":"104","pm10":"63","grade":"나쁨","pm25":"41","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.036","msradmcode":"111181"},{"msrstename":"서대문구","ozone":"0.061","carbon":"0.5","sulfurous":"0.003","maxindex":"119","pm10":"91","grade":"나쁨","pm25":"38","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.020","msradmcode":"111191"},{"msrstename":"마포구","ozone":"0.064","carbon":"0.6","sulfurous":"0.004","maxindex":"119","pm10":"101","grade":"나쁨","pm25":"41","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.024","msradmcode":"111201"},{"msrstename":"양천구","ozone":"0.062","carbon":"0.5","sulfurous":"0.004","maxindex":"85","pm10":"63","grade":"보통","pm25":"32","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.031","msradmcode":"111301"},{"msrstename":"강서구","ozone":"0.062","carbon":"0.5","sulfurous":"0.004","maxindex":"91","pm10":"72","grade":"보통","pm25":"27","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.028","msradmcode":"111212"},{"msrstename":"구로구","ozone":"0.056","carbon":"0.4","sulfurous":"0.005","maxindex":"100","pm10":"90","grade":"보통","pm25":"38","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.037","msradmcode":"111221"},{"msrstename":"금천구","ozone":"0.039","carbon":"0.6","sulfurous":"0.004","maxindex":"92","pm10":"69","grade":"보통","pm25":"27","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.052","msradmcode":"111281"},{"msrstename":"영등포구","ozone":"0.038","carbon":"0.8","sulfurous":"0.006","maxindex":"119","pm10":"94","grade":"나쁨","pm25":"43","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.045","msradmcode":"111231"},{"msrstename":"동작구","ozone":"0.066","carbon":"0.8","sulfurous":"0.006","maxindex":"89","pm10":"73","grade":"보통","pm25":"43","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.037","msradmcode":"111241"},{"msrstename":"관악구","ozone":"0.041","carbon":"0.5","sulfurous":"0.004","maxindex":"123","pm10":"89","grade":"나쁨","pm25":"44","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.049","msradmcode":"111251"},{"msrstename":"서초구","ozone":"0.050","carbon":"0.5","sulfurous":"0.004","maxindex":"106","pm10":"79","grade":"나쁨","pm25":"29","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.046","msradmcode":"111262"},{"msrstename":"강남구","ozone":"0.030","carbon":"0.6","sulfurous":"0.006","maxindex":"89","pm10":"71","grade":"보통","pm25":"39","msrdate":"201805262100","pollutant":"NO2","nitrogen":"0.053","msradmcode":"111261"},{"msrstename":"송파구","ozone":"0.063","carbon":"0.9","sulfurous":"0.004","maxindex":"117","pm10":"94","grade":"나쁨","pm25":"47","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.044","msradmcode":"111273"},{"msrstename":"강동구","ozone":"0.048","carbon":"0.7","sulfurous":"0.005","maxindex":"91","pm10":"79","grade":"보통","pm25":"32","msrdate":"201805262100","pollutant":"PM10","nitrogen":"0.045","msradmcode":"111274"}]}');
+
+  var cityList = new Array();
+  for(var i=0; i<25; i++){
+    var temp = {
+      msrstename : obj.DATA[i].msrstename,
+      ozone : obj.DATA[i].ozone,
+      carbon: obj.DATA[i].carbon,
+      sulfurous: obj.DATA[i].sulfurous,
+      maxindex: obj.DATA[i].maxindex,
+      pm10: obj.DATA[i].pm10,
+      grade: obj.DATA[i].grade,
+      pm25 : obj.DATA[i].pm25,
+      msrdate : obj.DATA[i].msrdate,
+      pollutant: obj.DATA[i].pollutant,
+      nitrogen: obj.DATA[i].nitrogen,
+      msradmcode: obj.DATA[i].msradmcode };
+    cityList.push(temp);
+  }
+
+  document.getElementById("demo").innerHTML = cityList[0].msrstename;
+  document.getElementById("demo").innerHTML += "<br>"+obj.DESCRIPTION.PM25;
+  document.getElementById("demo").innerHTML += " : "+cityList[0].pm25;
+
+  document.getElementById("demo").innerHTML += "<br>"+obj.DESCRIPTION.OZONE;
+  document.getElementById("demo").innerHTML += " : "+cityList[0].ozone;
+
+  document.getElementById("demo").innerHTML += "<br>"+obj.DESCRIPTION.CARBON;
+  document.getElementById("demo").innerHTML += " : "+cityList[0].carbon;
+
+  document.getElementById("demo").innerHTML += "<br>"+obj.DESCRIPTION.POLLUTANT;
+  document.getElementById("demo").innerHTML += " : "+cityList[0].pollutant;
+
+  document.getElementById("demo").innerHTML += "<br>"+obj.DESCRIPTION.PM10;
+  document.getElementById("demo").innerHTML += " : "+cityList[0].pm10;
+
+  document.getElementById("demo").innerHTML += "<br>"+obj.DESCRIPTION.PM25;
+  document.getElementById("demo").innerHTML += " : "+cityList[0].pm25;
+
+</script>
+
+
+</body>
+</html>
