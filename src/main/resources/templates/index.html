@@ -8,7 +8,6 @@
         float: left;
         width: 50%;
     }
-
     .right-box {
         float: right;
         width: 50%;
@@ -19,206 +18,10 @@
 <head>
     <meta charset="utf-8">
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcNU3xUtfkL6exAXrn918Uux2cx3DDIJA"></script>
-
-    <script>
-
-        var districtName = null;
-        var map;
-        var myCenter = new google.maps.LatLng(37.554117, 126.988480);
-
-        var icon = {
-            url: "img/25.png", // url
-            scaledSize: new google.maps.Size(50, 32), // scaled size
-            origin: new google.maps.Point(0, 0), // origin
-            anchor: new google.maps.Point(0, 0) // anchor
-        };
-
-        var icons = {
-            one: {
-                icon: "img/20.png",
-                scaledSize: new google.maps.Size(2, 2), // scaled size
-                origin: new google.maps.Point(0, 0), // origin
-                anchor: new google.maps.Point(0, 0) // anchor
-            },
-            two: {
-                icon: 'img/40.png'
-            },
-            three: {
-                icon: 'img/80.png'
-            }
-        };
-
-        var features = [
-            {
-                position: new google.maps.LatLng(37.59460958839853, 126.97783699462889),
-                type: '종로구',
-                icon: '10.png'
-            }, {
-                position: new google.maps.LatLng(37.577469676610335, 126.94110145996092),
-                type: '서대문구',
-                icon: '20.png'
-            }, {
-                position: new google.maps.LatLng(37.558420701826506, 126.9067691845703),
-                type: '마포구',
-                icon: '30.png'
-            }, {
-                position: new google.maps.LatLng(37.5236496426364, 126.85450136943814),
-                type: '양천구',
-                icon: '15.png'
-            }, {
-                position: new google.maps.LatLng(37.52147129113932, 126.91269457622525),
-                type: '영등포구',
-                icon: '155.png'
-            }, {
-                position: new google.maps.LatLng(37.494236531516556, 126.85673296733853),
-                type: '구로구',
-                icon: '32.png'
-            }, {
-                position: new google.maps.LatLng(37.4983223788854, 126.95011675640103),
-                type: '동작구',
-                icon: '70.png'
-            }, {
-                position: new google.maps.LatLng(37.467536828021956, 126.9432503013229),
-                type: '관악구',
-                icon: '56.png'
-            }, {
-                position: new google.maps.LatLng(37.461814221824106, 126.90102160259244),
-                type: '금천구',
-                icon: '60.png'
-            }, {
-                position: new google.maps.LatLng(37.487466344219136, 127.01770420443415),
-                type: '서초구',
-                icon: '63.png'
-            }, {
-                position: new google.maps.LatLng(37.49754527695926, 127.0640527762115),
-                type: '강남구',
-                icon: '70.png'
-            }, {
-                position: new google.maps.LatLng(37.50707815066313, 127.11761112582087),
-                type: '송파구',
-                icon: '76.png'
-            }, {
-                position: new google.maps.LatLng(37.550172589855215, 127.14759413867557),
-                type: '강동구',
-                icon: '73.png'
-            }, {
-                position: new google.maps.LatLng(37.545272952461666, 127.08476607471073),
-                type: '광진구',
-                icon: '32.png'
-            }, {
-                position: new google.maps.LatLng(37.579102219193565, 127.0550846142578),
-                type: '동대문구',
-                icon: '103.png'
-            }, {
-                position: new google.maps.LatLng(37.59460958839853, 127.09319343994139),
-                type: '중랑구',
-                icon: '39.png'
-            }, {
-                position: new google.maps.LatLng(37.605711015919375, 127.0198940319824),
-                type: '성북구',
-                icon: '70.png'
-            }, {
-                position: new google.maps.LatLng(37.65144229622412, 127.07516899536131),
-                type: '노원구',
-                icon: '120.png'
-            }, {
-                position: new google.maps.LatLng(37.6668092877513, 127.03425457098206),
-                type: '도봉구',
-                icon: '169.png'
-            }, {
-                position: new google.maps.LatLng(37.61835948695618, 126.92771876113534),
-                type: '은평구',
-                icon: '36.png'
-            }, {
-                position: new google.maps.LatLng(37.53074288759578, 126.98041191528318),
-                type: '용산구',
-                icon: '38.png'
-            }, {
-                position: new google.maps.LatLng(37.64157347245449, 127.01281127177367),
-                type: '강북구',
-                icon: '31.png'
-            }, {
-                position: new google.maps.LatLng(37.56017422261484, 126.82512840756999),
-                type: '강서구',
-                icon: '39.png'
-            }, {
-                position: new google.maps.LatLng(37.54859299284488, 127.04097617871048),
-                type: '성동구',
-                icon: '48.png'
-            }, {
-                position: new google.maps.LatLng(37.55971520951018, 126.99556005016836),
-                type: '중구',
-                icon: '37.png'
-            }
-        ];
-
-
-        function placeMarker() {
-            features.forEach(function (feature) {
-                var icon = {
-                    url: "https://raw.githubusercontent.com/knwlim/image_marker/master/img/" + (feature.icon ? feature.icon : '25.png'), // url
-                    scaledSize: new google.maps.Size(50, 32), // scaled size
-                    origin: new google.maps.Point(0, 0), // origin
-                    anchor: new google.maps.Point(0, 0) // anchor
-                };
-
-                var marker = new google.maps.Marker({
-                    position: feature.position,
-                    icon: icon,
-                    map: map,
-
-                });
-
-                var infowindow = new google.maps.InfoWindow({
-                    content: 'District : ' + feature.type + '<br>Latitude: ' + feature.position.lat() + '<br>Longitude: ' + feature.position.lng()
-                });
-
-                //when marked clicked
-                marker.addListener('click', function () {
-                    infowindow.open(map, marker);
-                    districtName = feature.type;
-
-                    for (var i in districtArr) {
-                        if (districtArr[i].MSRSTENAME == districtName) {
-                            document.getElementById('MSRDATE').innerHTML = districtArr[i].MSRDATE;
-                            document.getElementById('MSRADMCODE').innerHTML = districtArr[i].MSRADMCODE;
-                            document.getElementById('MSRSTENAME').innerHTML = districtArr[i].MSRSTENAME;
-                            document.getElementById('MAXINDEX').innerHTML = districtArr[i].MAXINDEX;
-                            document.getElementById('GRADE').innerHTML = districtArr[i].GRADE;
-                            document.getElementById('POLLUTANT').innerHTML = districtArr[i].POLLUTANT;
-                            document.getElementById('NITROGEN').innerHTML = districtArr[i].NITROGEN;
-                            document.getElementById('OZONE').innerHTML = districtArr[i].OZONE;
-                            document.getElementById('CARBON').innerHTML = districtArr[i].CARBON;
-                            document.getElementById('SULFUROUS').innerHTML = districtArr[i].SULFUROUS;
-                            document.getElementById('NITROGEN').innerHTML = districtArr[i].NITROGEN;
-                            document.getElementById('PM10').innerHTML = districtArr[i].PM10;
-                            document.getElementById('PM20').innerHTML = districtArr[i].PM20;
-                            break;
-                        }
-                    }
-
-                });
-            });
-        }
-
-
-        function initialize() {
-            var mapProp = {
-                center: myCenter,
-                zoom: 12,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            };
-            map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-            placeMarker();
-        }
-
-
-        google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
 </head>
 
 
-<body data-root="${rootContext}">
+<body>
 <h2>Seoul Air Project</h2>
 
 <!--left view : map-->
@@ -242,8 +45,233 @@
 </div>
 
 <script>
-  var districts_test_1 = {{{districts}}};
+    var districts = {{{districts}}}
+
+    /// Why iterate? districts is already json object
+
+    var districtArr = new Array();
+    var pmq10dic = {};
 </script>
+
+{{#districts}}
+<!--list that will save district info-->
+<script>
+  // A district
+  var distrcit = {
+    MSRDATE: null,
+    MSRADMCODE: null,
+    MSRSTENAME: null,
+    MAXINDEX: null,
+    GRADE: null,
+    POLLUTANT: null,
+    NITROGEN: null,
+    OZONE: null,
+    CARBON: null,
+    SULFUROUS: null,
+    PM10: null,
+    PM20: null
+  };
+  // district info
+  distrcit.MSRDATE = '{{MSRDATE}}';
+  distrcit.MSRADMCODE = '{{MSRADMCODE}}';
+  distrcit.MSRSTENAME = '{{MSRSTENAME}}';
+  distrcit.MAXINDEX = '{{MAXINDEX}}';
+  distrcit.GRADE = '{{GRADE}}';
+  distrcit.POLLUTANT = '{{POLLUTANT}}';
+  distrcit.NITROGEN = '{{NITROGEN}}';
+  distrcit.OZONE = '{{OZONE}}';
+  distrcit.CARBON = '{{CARBON}}';
+  distrcit.SULFUROUS = '{{SULFUROUS}}';
+  distrcit.PM10 = '{{PM10}}';
+  distrcit.PM20 = '{{PM20}}';
+  // save in list
+  districtArr.push(distrcit);
+  pmq10dic[distrcit.MSRSTENAME] = distrcit.PM10;
+</script>
+
+{{/districts}}
+
+<script>
+  var districtName = null;
+  var map;
+  var myCenter = new google.maps.LatLng(37.554117, 126.988480);
+  var icon = {
+    url: "img/25.png", // url
+    scaledSize: new google.maps.Size(50, 32), // scaled size
+    origin: new google.maps.Point(0, 0), // origin
+    anchor: new google.maps.Point(0, 0) // anchor
+  };
+  var icons = {
+    one: {
+      icon: "img/20.png",
+      scaledSize: new google.maps.Size(2, 2), // scaled size
+      origin: new google.maps.Point(0, 0), // origin
+      anchor: new google.maps.Point(0, 0) // anchor
+    },
+    two: {
+      icon: 'img/40.png'
+    },
+    three: {
+      icon: 'img/80.png'
+    }
+  };
+  var features = [
+    {
+      position: new google.maps.LatLng(37.59460958839853, 126.97783699462889),
+      type: '종로구',
+      icon: pmq10dic['종로구']+'.png'
+    }, {
+      position: new google.maps.LatLng(37.577469676610335, 126.94110145996092),
+      type: '서대문구',
+      icon: pmq10dic['서대문구']+'.png'
+    }, {
+      position: new google.maps.LatLng(37.558420701826506, 126.9067691845703),
+      type: '마포구',
+      icon: pmq10dic['마포구']+'.png'
+    }, {
+      position: new google.maps.LatLng(37.5236496426364, 126.85450136943814),
+      type: '양천구',
+      icon: pmq10dic['양천구']+'.png'
+    }, {
+      position: new google.maps.LatLng(37.52147129113932, 126.91269457622525),
+      type: '영등포구',
+      icon: pmq10dic['영등포구']+'.png'
+    }, {
+      position: new google.maps.LatLng(37.494236531516556, 126.85673296733853),
+      type: '구로구',
+      icon: pmq10dic['구로구']+'.png'
+    }, {
+      position: new google.maps.LatLng(37.4983223788854, 126.95011675640103),
+      type: '동작구',
+      icon: pmq10dic['동작구']+'.png'
+    }, {
+      position: new google.maps.LatLng(37.467536828021956, 126.9432503013229),
+      type: '관악구',
+      icon: pmq10dic['관악구']+'.png'
+    }, {
+      position: new google.maps.LatLng(37.461814221824106, 126.90102160259244),
+      type: '금천구',
+      icon: pmq10dic['금천구']+'.png'
+    }, {
+      position: new google.maps.LatLng(37.487466344219136, 127.01770420443415),
+      type: '서초구',
+      icon: pmq10dic['서초구']+'.png'
+    }, {
+      position: new google.maps.LatLng(37.49754527695926, 127.0640527762115),
+      type: '강남구',
+      icon: pmq10dic['강남구']+'.png'
+    }, {
+      position: new google.maps.LatLng(37.50707815066313, 127.11761112582087),
+      type: '송파구',
+      icon: pmq10dic['송파구']+'.png'
+    }, {
+      position: new google.maps.LatLng(37.550172589855215, 127.14759413867557),
+      type: '강동구',
+      icon: pmq10dic['강동구']+'.png'
+    }, {
+      position: new google.maps.LatLng(37.545272952461666, 127.08476607471073),
+      type: '광진구',
+      icon: pmq10dic['광진구']+'.png'
+    }, {
+      position: new google.maps.LatLng(37.579102219193565, 127.0550846142578),
+      type: '동대문구',
+      icon: pmq10dic['동대문구']+'.png'
+    }, {
+      position: new google.maps.LatLng(37.59460958839853, 127.09319343994139),
+      type: '중랑구',
+      icon: pmq10dic['중랑구']+'.png'
+    }, {
+      position: new google.maps.LatLng(37.605711015919375, 127.0198940319824),
+      type: '성북구',
+      icon: pmq10dic['성북구']+'.png'
+    }, {
+      position: new google.maps.LatLng(37.65144229622412, 127.07516899536131),
+      type: '노원구',
+      icon: pmq10dic['노원구']+'.png'
+    }, {
+      position: new google.maps.LatLng(37.6668092877513, 127.03425457098206),
+      type: '도봉구',
+      icon: pmq10dic['도봉구']+'.png'
+    }, {
+      position: new google.maps.LatLng(37.61835948695618, 126.92771876113534),
+      type: '은평구',
+      icon: pmq10dic['은평구']+'.png'
+    }, {
+      position: new google.maps.LatLng(37.53074288759578, 126.98041191528318),
+      type: '용산구',
+      icon: pmq10dic['용산구']+'.png'
+    }, {
+      position: new google.maps.LatLng(37.64157347245449, 127.01281127177367),
+      type: '강북구',
+      icon: pmq10dic['강북구']+'.png'
+    }, {
+      position: new google.maps.LatLng(37.56017422261484, 126.82512840756999),
+      type: '강서구',
+      icon: pmq10dic['강서구']+'.png'
+    }, {
+      position: new google.maps.LatLng(37.54859299284488, 127.04097617871048),
+      type: '성동구',
+      icon: pmq10dic['성동구']+'.png'
+    }, {
+      position: new google.maps.LatLng(37.55971520951018, 126.99556005016836),
+      type: '중구',
+      icon: pmq10dic['중구']+'.png'
+    }
+  ];
+  function placeMarker() {
+    features.forEach(function (feature) {
+      var icon = {
+        url: "https://raw.githubusercontent.com/knwlim/image_marker/master/img/" + (pmq10dic[feature.type] != "점검중" ? feature.icon : 'no2.png'), // url
+        scaledSize: new google.maps.Size(50, 32), // scaled size
+        origin: new google.maps.Point(0, 0), // origin
+        anchor: new google.maps.Point(0, 0) // anchor
+      };
+      console.log(feature.icon)
+      var marker = new google.maps.Marker({
+        position: feature.position,
+        icon: icon,
+        map: map,
+      });
+      var infowindow = new google.maps.InfoWindow({
+        content: 'District : ' + feature.type + '<br>Latitude: ' + feature.position.lat() + '<br>Longitude: ' + feature.position.lng()
+      });
+      //when marked clicked
+      marker.addListener('click', function () {
+        infowindow.open(map, marker);
+        districtName = feature.type;
+        for (var i in districtArr) {
+          if (districtArr[i].MSRSTENAME == districtName) {
+            document.getElementById('MSRDATE').innerHTML = districtArr[i].MSRDATE;
+            document.getElementById('MSRADMCODE').innerHTML = districtArr[i].MSRADMCODE;
+            document.getElementById('MSRSTENAME').innerHTML = districtArr[i].MSRSTENAME;
+            document.getElementById('MAXINDEX').innerHTML = districtArr[i].MAXINDEX;
+            document.getElementById('GRADE').innerHTML = districtArr[i].GRADE;
+            document.getElementById('POLLUTANT').innerHTML = districtArr[i].POLLUTANT;
+            document.getElementById('NITROGEN').innerHTML = districtArr[i].NITROGEN;
+            document.getElementById('OZONE').innerHTML = districtArr[i].OZONE;
+            document.getElementById('CARBON').innerHTML = districtArr[i].CARBON;
+            document.getElementById('SULFUROUS').innerHTML = districtArr[i].SULFUROUS;
+            document.getElementById('NITROGEN').innerHTML = districtArr[i].NITROGEN;
+            document.getElementById('PM10').innerHTML = districtArr[i].PM10;
+            document.getElementById('PM20').innerHTML = districtArr[i].PM20;
+            break;
+          }
+        }
+      });
+    });
+  }
+  function initialize() {
+    var mapProp = {
+      center: myCenter,
+      zoom: 12,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+    placeMarker();
+  }
+  google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+
 
 
 </body>
