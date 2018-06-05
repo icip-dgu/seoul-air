@@ -1,6 +1,55 @@
-<div>
-    {{#districts}}
-    <h1>{{MSRDATE}}</h1>
-    <h3>{{GRADE}}</h3>
-    {{/districts}}
-</div>
+<script>
+    var districtArr = new Array();
+    console.log(temp);
+</script>
+
+{{#districts}}
+<script>
+
+    // A district
+    var distrcit = {
+        MSRDATE: null,
+        MSRSTENAME: null,
+        MAXINDEX: null,
+        GRADE: null,
+        POLLUTANT: null,
+        NITROGEN: null,
+        OZONE: null,
+        CARBON: null,
+        SULFUROUS: null,
+        PM10: null,
+        PM20: null
+    };
+
+    // district info
+    distrcit.MSRDATE = '{{MSRDATE}}';
+    distrcit.MSRSTENAME = '{{MSRSTENAME}}';
+    distrcit.MAXINDEX = '{{MAXINDEX}}';
+    distrcit.GRADE = '{{GRADE}}';
+    distrcit.POLLUTANT = '{{POLLUTANT}}';
+    distrcit.NITROGEN = '{{NITROGEN}}';
+    distrcit.OZONE = '{{OZONE}}';
+    distrcit.CARBON = '{{CARBON}}';
+    distrcit.SULFUROUS = '{{SULFUROUS}}';
+    distrcit.PM10 = '{{PM10}}';
+    distrcit.PM20 = '{{PM20}}';
+
+    // save in list
+    districtArr.push(distrcit)
+</script>
+{{/districts}}
+
+
+<script>
+    for (var i in districtArr) {
+        console.log(districtArr[i].CARBON);
+    }
+</script>
+
+
+<!--<div>-->
+<!--{{#districts}}-->
+<!--<h1>{{MSRDATE}}</h1>-->
+<!--<h3>{{GRADE}}</h3>-->
+<!--{{/districts}}-->
+<!--</div>-->
