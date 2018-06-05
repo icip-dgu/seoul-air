@@ -25,6 +25,7 @@ public class DistrictController {
 
     @GetMapping("/")
     public ModelAndView getAirInfo() throws IOException {
+        System.out.println("-------");
 
         ArrayList<District> districts = new ArrayList<>();
 
