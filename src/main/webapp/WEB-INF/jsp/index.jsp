@@ -84,8 +84,6 @@
     //MARKER
     function placeMarker(location) {
 
-
-
         // check that what district is clicked
         test();
 
