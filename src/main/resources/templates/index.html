@@ -241,51 +241,9 @@
     <span id='PM20'></span><br>
 </div>
 
-
-
-<!--list that will save district info-->
 <script>
-    var districtArr = new Array();
+  var districts_test_1 = {{{districts}}};
 </script>
-
-{{#districts}}
-<script>
-
-    // A district
-    var distrcit = {
-        MSRDATE: null,
-        MSRADMCODE: null,
-        MSRSTENAME: null,
-        MAXINDEX: null,
-        GRADE: null,
-        POLLUTANT: null,
-        NITROGEN: null,
-        OZONE: null,
-        CARBON: null,
-        SULFUROUS: null,
-        PM10: null,
-        PM20: null
-    };
-
-    // district info
-    distrcit.MSRDATE = '{{MSRDATE}}';
-    distrcit.MSRADMCODE = '{{MSRADMCODE}}';
-    distrcit.MSRSTENAME = '{{MSRSTENAME}}';
-    distrcit.MAXINDEX = '{{MAXINDEX}}';
-    distrcit.GRADE = '{{GRADE}}';
-    distrcit.POLLUTANT = '{{POLLUTANT}}';
-    distrcit.NITROGEN = '{{NITROGEN}}';
-    distrcit.OZONE = '{{OZONE}}';
-    distrcit.CARBON = '{{CARBON}}';
-    distrcit.SULFUROUS = '{{SULFUROUS}}';
-    distrcit.PM10 = '{{PM10}}';
-    distrcit.PM20 = '{{PM20}}';
-
-    // save in list
-    districtArr.push(distrcit)
-
-</script>
-{{/districts}}
 
 
 </body>
